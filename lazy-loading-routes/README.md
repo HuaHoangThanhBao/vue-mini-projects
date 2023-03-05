@@ -1,5 +1,4 @@
 # Vue 3 + TypeScript + Vite
 
-RUN
-[yarn build]() to build routes with webpack
-you can see webpack files created in folder [dist/assets]()
+- RUN [yarn build]() to build routes with webpack
+- Then, you can see routes files created by webpack in folder [dist/assets]()
