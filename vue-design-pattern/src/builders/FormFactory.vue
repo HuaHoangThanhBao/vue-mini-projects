@@ -1,7 +1,7 @@
 <template>
-    <form action="" @submit.prevent="submit">
-        <div v-for="(field, index) in fields" :key="field.name">
-            <label :for="field.name" class="label">
+    <form action="" @submit.prevent="handleSubmit" :class="this.class">
+        <div v-for="(field, index) in fields" :key="field.name" :class="this.rwClass">
+            <label :for="field.name" :class="this.lbClass">
                 {{field.label}}
             </label>
             <component 
@@ -9,14 +9,16 @@
                 :is="field.component"
                 :type="field.type"
                 v-bind="{...field.props, ...field.attrs}"
+                :class="field.class"
                 :model-value="field?.props?.value"
-                @update:modelValue="onChangeHandler($event, field.name, index)"
+                @update:modelValue="this.onChangeHandler($event, field.name, index)"
             />
             <div class="error" v-if="errors[field.name]">
                 {{errors[field.name]}}
             </div>
         </div>
-        <button type="submit" :disabled="!submitable">Submit</button>
+        <button type="submit" @click="this.submit" :disabled="!submitable" :class="this.submitBtnClass">Submit</button>
+        <button v-if="this.isCancel" @click="this.cancel" :disabled="!submitable" :class="this.cancelBtnClass">Cancel</button>
         <br />
         <br />
         <pre>{{ values }}</pre>
@@ -47,6 +49,35 @@ export default defineComponent({
     fields: {
       type: Array as PropType<Field[]>,
       default: () => [],
+    },
+    class: {
+      type: String,
+      default: 'form-item'
+    },
+    rwClass: {
+      type: String,
+      default: 'form'
+    },
+    lbClass: {
+      type: String,
+      default: 'form-group'
+    },
+    submitBtnClass: {
+      type: String,
+      default: 'form-submit-btn'
+    },
+    cancelBtnClass: {
+      type: String,
+      default: 'form-cancel-btn'
+    },
+    submit: {
+      type: Function
+    },
+    cancel: {
+      type: Function
+    },
+    isCancel: {
+      type: Boolean
     },
   },
   data(): DataStructure {
@@ -88,7 +119,7 @@ export default defineComponent({
         valid: true,
       };
     },
-    async submit() {
+    async handleSubmit() {
       for (const { name, validation } of this.fields) {
         const { valid, message } = this.validate(this.values[name], validation);
         this.throwErrors(name, valid, message);

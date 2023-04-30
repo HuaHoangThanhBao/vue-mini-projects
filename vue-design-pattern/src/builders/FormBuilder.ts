@@ -14,14 +14,35 @@ export interface Field {
     attrs?: ObjectGeneric
     validation?: any
     class?: string
+    lbClass?: string;
+    frmClass?: string;
+    rwClass?: string
+}
+
+export interface FormStyle {
+    frmClass?: string;
+    lbClass?: string;
+    rwClass?: string
+    submitBtnClass?: string
+    cancelBtnClass?: string
+}
+
+export interface FormAction {
+    submit?: () => void
+    cancel?: () => void
+    isCancel?: boolean
 }
 
 export default class FormBuilder {
     fields: Field[]
     provider: any
+    style: FormStyle
+    action: FormAction
 
     constructor() {
         this.fields = []
+        this.style = {}
+        this.action = {}
     }
 
     addField(field: Field) {
@@ -29,8 +50,20 @@ export default class FormBuilder {
         return this
     }
 
+    addStyle(frmStyle: FormStyle) {
+        this.style = frmStyle
+        return this
+    }
+
+    addAction(action: FormAction) {
+        this.action = action
+        return this
+    }
+
     build() {
         const Fields = this.fields;
+        const style = this.style;
+        const action = this.action;
 
         return defineComponent({
             props: {
@@ -40,7 +73,7 @@ export default class FormBuilder {
                 }
             },
             render(): VNode {
-                return h(FormFactory, { fields: Fields, id: this.id})
+                return h(FormFactory, { fields: Fields, id: this.id, ...style, class: style.frmClass, ...action })
             }
         })
     }
