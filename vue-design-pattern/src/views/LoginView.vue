@@ -7,11 +7,11 @@
 import FormBuilder from "@/builders/FormBuilder";
 import FormDirector from "@/builders/FormDirector";
 import Modal from "@/chains/Modal.vue";
-import Message from "../chains/Message.vue";
+import Message from "@/chains/Message.vue";
 
 import { defineComponent, shallowRef } from "vue";
-import { FormAction } from "../builders/FormBuilder";
-import { Step } from "../chains/Chain";
+import { FormAction } from "@/builders/FormBuilder";
+import { Step } from "@/chains/Chain";
 
 export default defineComponent({
   data() {

@@ -6,8 +6,9 @@ import { RouterLink, RouterView } from "vue-router";
   <header>
     <div class="wrapper">
       <nav>
-        <RouterLink to="/">Login Form (Builder Pattern)</RouterLink>
-        <RouterLink to="/sign-up">Sign Up Form (Builder Pattern)</RouterLink>
+        <RouterLink to="/">Login Form (Builder Pattern & Chain of responsibility)</RouterLink>
+        <RouterLink to="/sign-up">Sign Up Form (Builder Pattern & Chain of responsibility)</RouterLink>
+        <RouterLink to="/list">Table list (Chain of responsibility)</RouterLink>
         <!-- <RouterLink to="/container-pattern">Container Pattern</RouterLink>
         <RouterLink to="/provide-inject-pattern"
           >Provide Inject Pattern</RouterLink

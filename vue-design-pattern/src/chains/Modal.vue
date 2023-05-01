@@ -2,7 +2,7 @@
   <div class="modal-backdrop" v-if="isShow">
     <div class="modal">
       <header class="modal-header">
-        <slot name="header"> This is the default title! </slot>
+        <slot name="header"> {{title}} </slot>
         <button type="button" class="btn-close" @click="handleClose">x</button>
       </header>
 
@@ -28,6 +28,10 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   props: {
+    title: {
+      type: String,
+      default: 'This is the default title!'
+    },
     isVisible: {
       type: Boolean,
       default: false,
