@@ -10,26 +10,21 @@ export default class FormDirector {
     this.builder = builder;
   }
 
-  makeLoginForm() {
+  makeLoginForm(formAction: FormAction) {
     const style: FormStyle = {
-      frmClass: 'form-loign',
-      rwClass: 'form-row',
-      lbClass: 'form-label',
-      submitBtnClass: 'form-submit-btn',
-      cancelBtnClass: 'form-cancel-btn',
-    }
-    const formAction: FormAction = {
-      submit: () => console.log('submited'),
-      cancel: () => console.log('canceled'),
-      isCancel: true
-    }
+      frmClass: "form-loign",
+      rwClass: "form-row",
+      lbClass: "form-label",
+      submitBtnClass: "form-submit-btn",
+      cancelBtnClass: "form-cancel-btn",
+    };
     return this.builder
       .addField({
         component: VInput,
         name: "username",
         type: "text",
         label: "username",
-        class: 'form--login__username',
+        class: "form--login__username",
         props: {
           value: "",
         },
@@ -40,7 +35,7 @@ export default class FormDirector {
         name: "password",
         type: "password",
         label: "password",
-        class: 'form--login__username',
+        class: "form--login__username",
         props: {
           value: "default password",
         },
@@ -50,19 +45,15 @@ export default class FormDirector {
       .addAction(formAction)
       .build();
   }
-  
-  makeSignUpForm() {
-    const formAction: FormAction = {
-      submit: () => console.log('submited'),
-      cancel: () => console.log('canceled')
-    }
+
+  makeSignUpForm(formAction: FormAction) {
     return this.builder
       .addField({
         component: VInput,
         name: "username",
         type: "text",
         label: "username",
-        class: 'form--signup__username',
+        class: "form--signup__username",
         props: {
           value: "",
         },
@@ -73,7 +64,7 @@ export default class FormDirector {
         name: "age",
         type: "number",
         label: "age",
-        class: 'form--signup__age',
+        class: "form--signup__age",
         props: {
           value: 10,
         },
@@ -83,7 +74,7 @@ export default class FormDirector {
         name: "password",
         type: "password",
         label: "password",
-        class: 'form--signup__password',
+        class: "form--signup__password",
         props: {
           value: "default password",
         },

@@ -1,33 +1,51 @@
 <template>
-    <form action="" @submit.prevent="handleSubmit" :class="this.class">
-        <div v-for="(field, index) in fields" :key="field.name" :class="this.rwClass">
-            <label :for="field.name" :class="this.lbClass">
-                {{field.label}}
-            </label>
-            <component 
-                :id="field.name"
-                :is="field.component"
-                :type="field.type"
-                v-bind="{...field.props, ...field.attrs}"
-                :class="field.class"
-                :model-value="field?.props?.value"
-                @update:modelValue="this.onChangeHandler($event, field.name, index)"
-            />
-            <div class="error" v-if="errors[field.name]">
-                {{errors[field.name]}}
-            </div>
-        </div>
-        <button type="submit" @click="this.submit" :disabled="!submitable" :class="this.submitBtnClass">Submit</button>
-        <button v-if="this.isCancel" @click="this.cancel" :disabled="!submitable" :class="this.cancelBtnClass">Cancel</button>
-        <br />
-        <br />
-        <pre>{{ values }}</pre>
-    </form>
+  <form action="" @submit.prevent="" :class="this.class">
+    <div
+      v-for="(field, index) in fields"
+      :key="field.name"
+      :class="this.rwClass"
+    >
+      <label :for="field.name" :class="this.lbClass">
+        {{ field.label }}
+      </label>
+      <component
+        :id="field.name"
+        :is="field.component"
+        :type="field.type"
+        v-bind="{ ...field.props, ...field.attrs }"
+        :class="field.class"
+        :model-value="field?.props?.value"
+        @update:modelValue="this.onChangeHandler($event, field.name, index)"
+      />
+      <div class="error" v-if="errors[field.name]">
+        {{ errors[field.name] }}
+      </div>
+    </div>
+    <button
+      type="submit"
+      @click="this.handleSubmit"
+      :disabled="!submitable"
+      :class="this.submitBtnClass"
+    >
+      Submit
+    </button>
+    <button
+      v-if="this.isCancel"
+      @click="this.cancel"
+      :disabled="!submitable"
+      :class="this.cancelBtnClass"
+    >
+      Cancel
+    </button>
+    <br />
+    <br />
+    <pre>{{ values }}</pre>
+  </form>
 </template>
 
 <script lang="ts">
-import { defineComponent, type PropType } from 'vue'
-import { ZodError } from "zod"
+import { defineComponent, type PropType } from "vue";
+import { ZodError } from "zod";
 import type { Field, ObjectGeneric } from "./FormBuilder";
 
 export interface ValidationResult {
@@ -52,32 +70,32 @@ export default defineComponent({
     },
     class: {
       type: String,
-      default: 'form-item'
+      default: "form-item",
     },
     rwClass: {
       type: String,
-      default: 'form'
+      default: "form",
     },
     lbClass: {
       type: String,
-      default: 'form-group'
+      default: "form-group",
     },
     submitBtnClass: {
       type: String,
-      default: 'form-submit-btn'
+      default: "form-submit-btn",
     },
     cancelBtnClass: {
       type: String,
-      default: 'form-cancel-btn'
+      default: "form-cancel-btn",
     },
     submit: {
-      type: Function
+      type: Function,
     },
     cancel: {
-      type: Function
+      type: Function,
     },
     isCancel: {
-      type: Boolean
+      type: Boolean,
     },
   },
   data(): DataStructure {
@@ -126,6 +144,7 @@ export default defineComponent({
       }
       if (this.submitable) {
         console.log("submit!!!");
+        this.submit();
       }
     },
     throwErrors(
