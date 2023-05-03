@@ -33,9 +33,13 @@ export default defineComponent({
 
     const dialogAction = {
       done: () => {
+        //you can fetch api to update data here
+        //after done we may redirect to another page
         this.step = shallowRef(
           chains.getNext().show({ message: "Modal accepted" })
         );
+        this.emitter.emit('loginDone', 'login submit a message after done')
+        this.$router.push('/sign-up')
       },
 
       close: () => {

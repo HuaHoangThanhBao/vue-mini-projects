@@ -101,7 +101,6 @@ export default defineComponent({
 
       const editAction = {
         done: () => {
-          console.log(chains.getNext());
           this.step = shallowRef(
             chains
               .getNext()
